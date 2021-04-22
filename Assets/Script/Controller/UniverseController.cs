@@ -74,3 +74,7 @@ public enum BuildingType
 {
 
 }
+public class GenerateRule
+{
+    public Dictionary<string, int> generateRule;
+}
