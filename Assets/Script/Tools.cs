@@ -96,7 +96,18 @@ public class Tools
     public static int getEnum<T>()
     {
         int type = 0;
-        GenerateRule rule = JsonConvert.DeserializeObject<GenerateRule>(File.ReadAllText(Application.streamingAssetsPath + "/Rule/" + typeof(T).ToString() + ".json"));
+        string filePath = Application.streamingAssetsPath + "/Rule/" + typeof(T).ToString() + ".json";
+        if(!File.Exists(filePath))
+        {
+            Debug.Log("Rule file not found!");
+            return 0;
+        }
+        GenerateRule rule = JsonConvert.DeserializeObject<GenerateRule>(File.ReadAllText(filePath));
+        if(rule == null)
+        {
+            Debug.Log("Rule file not correct!");
+            return 0;
+        }
         int maxCount = 0;
         List<string> temp = new List<string>();
         foreach (var item in rule.generateRule)
@@ -115,5 +126,25 @@ public class Tools
             type = examples.IndexOf(result);
         }
         return type;
+    }
+    public static void Serialize<T>(T obj, string filepath, string filename)
+    {
+        string json = JsonConvert.SerializeObject(obj);
+        if (!Directory.Exists(filepath))
+        {
+            Directory.CreateDirectory(filepath);
+        }
+        File.WriteAllText(filepath + filename, json);
+    }
+    public static T DeSerialize<T>(string filename)
+    {
+        T obj = default(T);
+        if (File.Exists(filename))
+        {
+            string json = File.ReadAllText(filename);
+            obj = (T)JsonConvert.DeserializeObject(json, typeof(T));
+        }
+
+        return obj;
     }
 }
