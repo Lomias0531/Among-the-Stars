@@ -1,4 +1,0 @@
-repository "Among the Stars@ssl://lomias0531@sh03-plasticscm.unity.cn:8787"
-  path "/"
-    smartbranch "/main/460492314" 
-     
