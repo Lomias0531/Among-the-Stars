@@ -93,10 +93,10 @@ public class Tools
         string[] I = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
         return M[num / 1000] + C[(num % 1000) / 100] + X[(num % 100) / 10] + I[(num % 10)];
     }
-    public static int getEnum<T>()
+    public static int getEnum<T>(string Name)
     {
         int type = 0;
-        string filePath = Application.streamingAssetsPath + "/Rule/" + typeof(T).ToString() + ".json";
+        string filePath = Application.streamingAssetsPath + "/Rule/" + Name + ".json";
         if(!File.Exists(filePath))
         {
             Debug.Log("Rule file not found!");
@@ -120,7 +120,7 @@ public class Tools
         }
         int rand = UnityEngine.Random.Range(0,maxCount);
         string result = temp[rand]; 
-        List<string> examples = Enum.GetNames(typeof(T).GetType()).ToList();
+        List<string> examples = Enum.GetNames(typeof(T)).ToList();
         if(examples.Contains(result))
         {
             type = examples.IndexOf(result);

@@ -34,7 +34,7 @@ public class BaseSystem
         for(int i = 0;i<5;i++)
         {
             coordX += Random.Range(-0.1f, 0.1f);
-            coordY += Random.Range(-0.02f, 0.02f);
+            coordY += Random.Range(-0.002f, 0.002f);
             coordZ += Random.Range(-0.1f, 0.1f);
         }
     }
