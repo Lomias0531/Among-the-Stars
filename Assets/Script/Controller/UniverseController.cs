@@ -40,41 +40,36 @@ public class UniverseController : BaseController<UniverseController>
         Camera.main.transform.position = new Vector3(Focus.x, Focus.y + 2, Focus.z - 10);
     }
 }
-public enum SystemType
-{
-    Brown_Dwarf,
-    Red_Dwarf,
-    Yellow_Dwarf,
-    White_Star,
-    Red_Gaint,
-    Blue_Gaint,
-    BlackHole,
-    Neturon,
-}
-public enum PlanetType
-{
-    Land,
-    Ocean,
-    Gas,
-    Lava,
-    Frozen,
-    Shattered,
-}
-public enum SlotType
-{
-    Plain,
-    Ocean,
-    Mountain,
-    Forest,
-    Swamp,
-    Ice,
-    Lava,
-}
-public enum BuildingType
-{
 
-}
 public class GenerateRule
 {
     public Dictionary<string, int> generateRule;
+}
+public class StarType
+{
+    public string starName;
+    public float starEnergy;
+    public int maxPlanets;
+    public float maxDistance;
+}
+public class PlanetType
+{
+    public string planetName;
+    public int minSlotNum;
+    public int maxSlotNum;
+}
+public class SlotType
+{
+    public string slotName;
+    public int minConstructionNum;
+    public int maxConstructionNum;
+    public List<ResourcesType> resources;
+}
+public class ConstructionType
+{
+    public string constructionName;
+}
+public class ResourcesType
+{
+    public string resourceName;
 }

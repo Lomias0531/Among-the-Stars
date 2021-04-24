@@ -93,20 +93,19 @@ public class Tools
         string[] I = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
         return M[num / 1000] + C[(num % 1000) / 100] + X[(num % 100) / 10] + I[(num % 10)];
     }
-    public static int getEnum<T>(string Name)
+    public static string getTypeName(string Name)
     {
-        int type = 0;
         string filePath = Application.streamingAssetsPath + "/Rule/" + Name + ".json";
         if(!File.Exists(filePath))
         {
             Debug.Log("Rule file not found!");
-            return 0;
+            return null;
         }
         GenerateRule rule = JsonConvert.DeserializeObject<GenerateRule>(File.ReadAllText(filePath));
         if(rule == null)
         {
             Debug.Log("Rule file not correct!");
-            return 0;
+            return null;
         }
         int maxCount = 0;
         List<string> temp = new List<string>();
@@ -119,13 +118,7 @@ public class Tools
             }
         }
         int rand = UnityEngine.Random.Range(0,maxCount);
-        string result = temp[rand]; 
-        List<string> examples = Enum.GetNames(typeof(T)).ToList();
-        if(examples.Contains(result))
-        {
-            type = examples.IndexOf(result);
-        }
-        return type;
+        return temp[rand]; 
     }
     public static void Serialize<T>(T obj, string filepath, string filename)
     {
@@ -146,5 +139,33 @@ public class Tools
         }
 
         return obj;
+    }
+    public static List<string> LoadFilesBySuffix(string filePath, string suffix)
+    {
+        List<string> fileList = new List<string>();
+        if (!Directory.Exists(filePath))
+            return fileList;
+        string[] files = Directory.GetFiles(filePath);
+        foreach (var fileName in files)
+        {
+            string[] fileNames = fileName.Split(new char[2] { '\\', '/' });
+            if (fileNames != null && fileNames.Length != 0)
+            {
+                var name = fileNames[fileNames.Length - 1];
+                if (suffix == "")
+                {
+                    if (name.Contains("."))
+                        continue;
+                }
+                else
+                {
+                    if (!name.EndsWith(suffix))
+                        continue;
+                }
+                if (!fileList.Contains(name))
+                    fileList.Add(name);
+            }
+        }
+        return fileList;
     }
 }

@@ -7,7 +7,7 @@ public class BasePlanet
     public string Name { get; set; }
     public int districtCount { get; set; }
     public List<BaseSlot> district { get; set; }
-    public PlanetType planetType { get; set; }
+    public string planetType { get; set; }
     public float distance { get; set; }
     public void Init(string systemName,int num)
     {
@@ -17,6 +17,7 @@ public class BasePlanet
         for(int i = 0;i<districtCount;i++)
         {
             BaseSlot slot = new BaseSlot();
+            slot.slotType = Tools.getTypeName(planetType);
             slot.Init();
             district.Add(slot);
         }

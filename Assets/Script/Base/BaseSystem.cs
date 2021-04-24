@@ -7,10 +7,11 @@ public class BaseSystem
     public string Name { get; set; }
     public List<BasePlanet> planets { get; set; }
     public int planetCount { get; set; }
-    public SystemType systemType { get; set; }
+    public string systemType { get; set; }
     public float coordX { get; set; }
     public float coordY { get; set; }
     public float coordZ { get; set; }
+    public float StarEnergy { get; set; }
     public GameObject star;
 
     public void Init()
@@ -34,8 +35,13 @@ public class BaseSystem
         for(int i = 0;i<5;i++)
         {
             coordX += Random.Range(-0.1f, 0.1f);
-            coordY += Random.Range(-0.002f, 0.002f);
+            coordY += Random.Range(-0.005f, 0.005f);
             coordZ += Random.Range(-0.1f, 0.1f);
         }
+    }
+    int GetPlanetType()
+    {
+        int planetType = 0;
+        return planetType;
     }
 }
