@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using LitJson;
 using UnityEngine;
 
 public class Tools
@@ -139,6 +140,17 @@ public class Tools
         }
 
         return obj;
+    }
+    public static void SaveDataToJson<T>(T obj,string filePath,string fileName)
+    {
+        {
+            string json = JsonMapper.ToJson(obj);
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+            File.WriteAllText(filePath + fileName, json);
+        }
     }
     public static List<string> LoadFilesBySuffix(string filePath, string suffix)
     {

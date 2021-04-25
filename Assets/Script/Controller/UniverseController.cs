@@ -45,31 +45,43 @@ public class GenerateRule
 {
     public Dictionary<string, int> generateRule;
 }
+[System.Serializable]
 public class StarType
 {
-    public string starName;
-    public float starEnergy;
-    public int maxPlanets;
-    public float maxDistance;
+    public string starName = "Example";
+    public float starEnergy = 0;
+    public int maxPlanets = 10;
+    public float maxDistance = 5;
+    public string description;
 }
+[System.Serializable]
 public class PlanetType
 {
-    public string planetName;
-    public int minSlotNum;
-    public int maxSlotNum;
+    public string planetName = "Example";
+    public int minSlotNum = 5;
+    public int maxSlotNum = 10;
+    public string description;
 }
+[System.Serializable]
 public class SlotType
 {
-    public string slotName;
-    public int minConstructionNum;
-    public int maxConstructionNum;
-    public List<ResourcesType> resources;
+    public string slotName = "Example";
+    public int minConstructionNum = 5;
+    public int maxConstructionNum = 10;
+    public Dictionary<string,int> resources = new Dictionary<string, int>();
+    public string description;
 }
+[System.Serializable]
 public class ConstructionType
 {
-    public string constructionName;
+    public string constructionName = "Example";
+    public int hitPoints = 100;
+    public Dictionary<string, int> requiredResource = new Dictionary<string, int>();
+    public string description;
 }
+[System.Serializable]
 public class ResourcesType
 {
-    public string resourceName;
+    public string resourceName = "Example";
+    public string description;
 }

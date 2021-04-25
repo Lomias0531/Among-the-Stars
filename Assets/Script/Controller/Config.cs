@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Newtonsoft.Json;
+using LitJson;
 
 public class Config : BaseController<Config>
 {
@@ -33,78 +35,42 @@ public class Config : BaseController<Config>
     {
         GetStarTypes();
         GetPlanetTypes();
+        GetResourceTypes();
         GetSlotTypes();
         GetConstructionTypes();
-        GetResourceTypes();
+    }
+    public void SaveData()
+    {
+        Tools.Serialize(starTypes, Application.streamingAssetsPath + "/Types/", "Stars.json");
+        Tools.Serialize(planetTypes, Application.streamingAssetsPath + "/Types/", "Planets.json");
+        Tools.Serialize(slotTypes, Application.streamingAssetsPath + "/Types/", "Slots.json");
+        Tools.Serialize(constructionTypes, Application.streamingAssetsPath + "/Types/", "Constructions.json");
+        Tools.Serialize(resourceTypes, Application.streamingAssetsPath + "/Types/", "Resources.json");
     }
     public void GetStarTypes()
     {
-        string folderPath = Application.streamingAssetsPath + "Types/Stars/";
-        List<string> files = Tools.LoadFilesBySuffix(folderPath, ".json");
-        if (files.Count == 0)
-        {
-            Debug.Log("Get stars type error!");
-            return;
-        }
-        foreach (var item in files)
-        {
-            starTypes.Add(Newtonsoft.Json.JsonConvert.DeserializeObject<StarType>(File.ReadAllText(folderPath + item)));
-        }
+        string filePath = Application.streamingAssetsPath + "/Types/Stars.json";
+        starTypes = JsonConvert.DeserializeObject<List<StarType>>(File.ReadAllText(filePath));
     }
     public void GetPlanetTypes()
     {
-        string folderPath = Application.streamingAssetsPath + "Types/Planets/";
-        List<string> files = Tools.LoadFilesBySuffix(folderPath, ".json");
-        if (files.Count == 0)
-        {
-            Debug.Log("Get planets type error!");
-            return;
-        }
-        foreach (var item in files)
-        {
-            planetTypes.Add(Newtonsoft.Json.JsonConvert.DeserializeObject<PlanetType>(File.ReadAllText(folderPath + item)));
-        }
+        string filePath = Application.streamingAssetsPath + "/Types/Planets.json";
+        planetTypes = JsonConvert.DeserializeObject<List<PlanetType>>(File.ReadAllText(filePath));
     }
     public void GetSlotTypes()
     {
-        string folderPath = Application.streamingAssetsPath + "Types/Slots/";
-        List<string> files = Tools.LoadFilesBySuffix(folderPath, ".json");
-        if (files.Count == 0)
-        {
-            Debug.Log("Get slots type error!");
-            return;
-        }
-        foreach (var item in files)
-        {
-            slotTypes.Add(Newtonsoft.Json.JsonConvert.DeserializeObject<SlotType>(File.ReadAllText(folderPath + item)));
-        }
+        string filePath = Application.streamingAssetsPath + "/Types/Slots.json";
+        //slotTypes = JsonMapper.ToObject<List<SlotType>>(File.ReadAllText(filePath));
+        slotTypes = JsonConvert.DeserializeObject<List<SlotType>>(File.ReadAllText(filePath));
     }
     public void GetConstructionTypes()
     {
-        string folderPath = Application.streamingAssetsPath + "Types/Constructions/";
-        List<string> files = Tools.LoadFilesBySuffix(folderPath, ".json");
-        if (files.Count == 0)
-        {
-            Debug.Log("Get constructions type error!");
-            return;
-        }
-        foreach (var item in files)
-        {
-            constructionTypes.Add(Newtonsoft.Json.JsonConvert.DeserializeObject<ConstructionType>(File.ReadAllText(folderPath + item)));
-        }
+        string filePath = Application.streamingAssetsPath + "/Types/Constructions.json";
+        constructionTypes = JsonConvert.DeserializeObject<List<ConstructionType>>(File.ReadAllText(filePath));
     }
     public void GetResourceTypes()
     {
-        string folderPath = Application.streamingAssetsPath + "Types/Resources/";
-        List<string> files = Tools.LoadFilesBySuffix(folderPath, ".json");
-        if (files.Count == 0)
-        {
-            Debug.Log("Get resources type error!");
-            return;
-        }
-        foreach (var item in files)
-        {
-            resourceTypes.Add(Newtonsoft.Json.JsonConvert.DeserializeObject<ResourcesType>(File.ReadAllText(folderPath + item)));
-        }
+        string filePath = Application.streamingAssetsPath + "/Types/Resources.json";
+        resourceTypes = JsonConvert.DeserializeObject<List<ResourcesType>>(File.ReadAllText(filePath));
     }
 }
