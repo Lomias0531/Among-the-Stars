@@ -6,6 +6,7 @@ public class UIController : BaseController<UIController>
 {
     public UniverseController universeController;
     public GameObject GalaticalMap;
+    public GameObject StarSystemSelection;
     // Start is called before the first frame update
     void Start()
     {
