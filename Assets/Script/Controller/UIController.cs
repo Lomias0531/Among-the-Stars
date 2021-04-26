@@ -10,7 +10,8 @@ public class UIController : BaseController<UIController>
     // Start is called before the first frame update
     void Start()
     {
-
+        StarSystemSelection = (GameObject)Resources.Load("Prefab/StarSystemSelection");
+        StarSystemSelection.SetActive(false);
     }
 
     // Update is called once per frame 
@@ -25,5 +26,14 @@ public class UIController : BaseController<UIController>
     public void InitStarSystem(BaseSystem starSystem)
     {
 
+    }
+    public void EnableStarSystemSelection(Vector3 pos)
+    {
+        StarSystemSelection.SetActive(true);
+        StarSystemSelection.transform.position = pos;
+    }
+    public void DisableStarSystemSelection()
+    {
+        StarSystemSelection.SetActive(false);
     }
 }
