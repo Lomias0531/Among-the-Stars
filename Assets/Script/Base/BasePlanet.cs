@@ -17,7 +17,7 @@ public class BasePlanet
         for(int i = 0;i<districtCount;i++)
         {
             BaseSlot slot = new BaseSlot();
-            slot.slotType = Tools.getTypeName(planetType);
+            //slot.slotType = Tools.getRule(planetType);
             slot.Init();
             district.Add(slot);
         }

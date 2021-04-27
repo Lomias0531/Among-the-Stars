@@ -23,7 +23,7 @@ public class BaseGalaxy
                 system.coordX = x;
                 system.coordY = y;
                 system.coordZ = 0;
-                system.systemType = Tools.getTypeName("SystemType");
+                system.systemType = Tools.getRule("SystemType");
                 system.Init();
                 systems.Add(system);
             }

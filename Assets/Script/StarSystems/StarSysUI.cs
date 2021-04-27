@@ -19,13 +19,11 @@ public class StarSysUI : MonoBehaviour
     }
     void OnMouseEnter()
     {
-        Debug.Log("EEE1" + gameObject.name);
         Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
         UIController.Instance.EnableStarSystemSelection(pos);
     }
     void OnMouseExit()
     {
-        Debug.Log("RRR1" + gameObject.name);
         UIController.Instance.DisableStarSystemSelection();
     }
 }

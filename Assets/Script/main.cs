@@ -75,15 +75,17 @@ public class main : MonoBehaviour
         slotType1.resources = new Dictionary<string, int>();
         slotType1.resources.Add("金属", 5);
         slotType1.resources.Add("有机物", 8);
+        slotType1.description = "平坦的土地";
         Config.Instance.slotTypes.Add(slotType1);
 
         SlotType slotType2 = new SlotType();
-        slotType2.slotName = "平原";
+        slotType2.slotName = "山脉";
         slotType2.minConstructionNum = 5;
         slotType2.maxConstructionNum = 10;
         slotType2.resources = new Dictionary<string, int>();
         slotType2.resources.Add("金属", 5);
         slotType2.resources.Add("有机物", 8);
+        slotType2.description = "高耸的山脉";
         Config.Instance.slotTypes.Add(slotType2);
 
         ConstructionType constructionType1 = new ConstructionType();
