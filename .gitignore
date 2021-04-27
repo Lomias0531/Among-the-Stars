@@ -6,3 +6,4 @@ Assembly-CSharp.csproj
 Assembly-CSharp.csproj
 obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
 *.csproj
+obj
