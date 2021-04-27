@@ -8,16 +8,26 @@ public class UIController : BaseController<UIController>
     public GameObject GalaticalMap;
     public GameObject StarSystemSelection;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        StarSystemSelection = (GameObject)Resources.Load("Prefab/StarSystemSelection");
+
+    }
+    public void Init()
+    {
+        StarSystemSelection = Instantiate((GameObject)Resources.Load("Prefab/StarSystemSelection"));
+        StarSystemSelection.transform.SetParent(GameObject.Find("Canvas").transform);
         StarSystemSelection.SetActive(false);
+        universeController = UniverseController.Instance;
     }
 
     // Update is called once per frame 
     void Update()
     {
-        
+        if(StarSystemSelection.activeSelf)
+        {
+            float scale = 30f/ Camera.main.fieldOfView;
+            StarSystemSelection.transform.localScale = new Vector3(scale,scale,1);
+        }
     }
     public void CreateStarSystem(BaseSystem starSystem)
     {

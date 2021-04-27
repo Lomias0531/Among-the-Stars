@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class StarSysUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class StarSysUI : MonoBehaviour
 {
 
     // Start is called before the first frame update
@@ -17,23 +17,15 @@ public class StarSysUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
         
     }
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-        UIController.Instance.EnableStarSystemSelection(pos);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        UIController.Instance.DisableStarSystemSelection();
-    }
     void OnMouseEnter()
     {
+        Debug.Log("EEE1" + gameObject.name);
         Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
         UIController.Instance.EnableStarSystemSelection(pos);
     }
     void OnMouseExit()
     {
+        Debug.Log("RRR1" + gameObject.name);
         UIController.Instance.DisableStarSystemSelection();
     }
 }

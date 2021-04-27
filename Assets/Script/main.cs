@@ -12,7 +12,8 @@ public class main : MonoBehaviour
 
         Config.Instance.LoadTypes();
         UniverseController.Instance.Init();
-        UIController.Instance.universeController = UniverseController.Instance;
+        UIController.Instance.Init();
+        //UIController.Instance.universeController = UniverseController.Instance;
     }
 
     // Update is called once per frame
