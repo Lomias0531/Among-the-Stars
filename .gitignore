@@ -10,3 +10,4 @@ obj
 Assembly-CSharp.csproj
 Packages/packages-lock.json
 ProjectSettings/ProjectVersion.txt
+Packages
