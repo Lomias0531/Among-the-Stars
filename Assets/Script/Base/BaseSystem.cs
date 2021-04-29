@@ -19,6 +19,7 @@ public class BaseSystem
         Name = Tools.GetRandomName(4, 8);
         Init_MovePos();
         star = (GameObject)GameObject.Instantiate(Resources.Load("Prefab/Star"));
+        star.GetComponent<StarSysUI>().thisStarSystem = this;
         star.transform.position = new Vector3(coordX*10, coordY*10, coordZ*10);
         star.name = Name;
         planetCount = Random.Range(1, 15);

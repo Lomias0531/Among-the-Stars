@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class StarSysUI : MonoBehaviour
 {
-
+    public BaseSystem thisStarSystem;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +20,7 @@ public class StarSysUI : MonoBehaviour
     void OnMouseEnter()
     {
         Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-        UIController.Instance.EnableStarSystemSelection(pos);
+        UIController.Instance.EnableStarSystemSelection(pos,thisStarSystem);
     }
     void OnMouseExit()
     {
