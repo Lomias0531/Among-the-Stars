@@ -42,11 +42,27 @@ public class UIController : BaseController<UIController>
     {
 
     }
-    public void EnableStarSystemSelection(Vector3 pos,BaseSystem sys)
+    public void EnableStarSystemSelection(Vector3 pos, BaseSystem sys)
     {
         StarSystemSelection.SetActive(true);
         StarSystemSelection.transform.position = pos;
-        DisplayInfo.transform.position = new Vector3(pos.x + 10, pos.y, pos.z);
+        if (pos.x < 135)
+        {
+            pos.x = 140;
+        }
+        if (pos.x > Screen.width - 135)
+        {
+            pos.x = Screen.width - 140;
+        }
+        if (pos.y < 210)
+        {
+            pos.y = 215;
+        }
+        if (pos.y > Screen.height - 210)
+        {
+            pos.y = Screen.height - 215;
+        }
+        DisplayInfo.transform.position = pos;
         DeployInfoDisplay(sys);
     }
     public void DisableStarSystemSelection()

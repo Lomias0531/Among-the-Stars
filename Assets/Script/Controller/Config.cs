@@ -11,21 +11,21 @@ public class Config : BaseController<Config>
     public string PlayerMotherWorldName;
     public string PlayerName;
 
-    public List<StarType> starTypes;
-    public List<PlanetType> planetTypes;
-    public List<SlotType> slotTypes;
-    public List<ConstructionType> constructionTypes;
-    public List<ResourcesType> resourceTypes;
+    public Dictionary<string, StarType> starTypes;
+    public Dictionary<string, PlanetType> planetTypes;
+    public Dictionary<string, SlotType> slotTypes;
+    public Dictionary<string, ConstructionType> constructionTypes;
+    public Dictionary<string, ResourcesType> resourceTypes;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public string GetFactionName()
     {
@@ -50,27 +50,27 @@ public class Config : BaseController<Config>
     public void GetStarTypes()
     {
         string filePath = Application.streamingAssetsPath + "/Types/Stars.json";
-        starTypes = JsonConvert.DeserializeObject<List<StarType>>(File.ReadAllText(filePath));
+        starTypes = JsonConvert.DeserializeObject<Dictionary<string, StarType>>(File.ReadAllText(filePath));
     }
     public void GetPlanetTypes()
     {
         string filePath = Application.streamingAssetsPath + "/Types/Planets.json";
-        planetTypes = JsonConvert.DeserializeObject<List<PlanetType>>(File.ReadAllText(filePath));
+        planetTypes = JsonConvert.DeserializeObject<Dictionary<string, PlanetType>>(File.ReadAllText(filePath));
     }
     public void GetSlotTypes()
     {
         string filePath = Application.streamingAssetsPath + "/Types/Slots.json";
         //slotTypes = JsonMapper.ToObject<List<SlotType>>(File.ReadAllText(filePath));
-        slotTypes = JsonConvert.DeserializeObject<List<SlotType>>(File.ReadAllText(filePath));
+        slotTypes = JsonConvert.DeserializeObject<Dictionary<string, SlotType>>(File.ReadAllText(filePath));
     }
     public void GetConstructionTypes()
     {
         string filePath = Application.streamingAssetsPath + "/Types/Constructions.json";
-        constructionTypes = JsonConvert.DeserializeObject<List<ConstructionType>>(File.ReadAllText(filePath));
+        constructionTypes = JsonConvert.DeserializeObject<Dictionary<string, ConstructionType>>(File.ReadAllText(filePath));
     }
     public void GetResourceTypes()
     {
         string filePath = Application.streamingAssetsPath + "/Types/Resources.json";
-        resourceTypes = JsonConvert.DeserializeObject<List<ResourcesType>>(File.ReadAllText(filePath));
+        resourceTypes = JsonConvert.DeserializeObject<Dictionary<string, ResourcesType>>(File.ReadAllText(filePath));
     }
 }
