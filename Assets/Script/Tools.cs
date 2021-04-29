@@ -102,7 +102,8 @@ public class Tools
             Debug.Log("Rule file not found!");
             return null;
         }
-        GenerateRule rule = JsonConvert.DeserializeObject<GenerateRule>(File.ReadAllText(filePath));
+        string str = File.ReadAllText(filePath, System.Text.Encoding.Default);
+        GenerateRule rule = JsonConvert.DeserializeObject<GenerateRule>(str);
         if(rule == null)
         {
             Debug.Log("Rule file not correct!");

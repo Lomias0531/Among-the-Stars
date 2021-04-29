@@ -16,6 +16,7 @@ public class Config : BaseController<Config>
     public Dictionary<string, SlotType> slotTypes;
     public Dictionary<string, ConstructionType> constructionTypes;
     public Dictionary<string, ResourcesType> resourceTypes;
+    public GenerateRule rule;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +47,7 @@ public class Config : BaseController<Config>
         Tools.Serialize(slotTypes, Application.streamingAssetsPath + "/Types/", "Slots.json");
         Tools.Serialize(constructionTypes, Application.streamingAssetsPath + "/Types/", "Constructions.json");
         Tools.Serialize(resourceTypes, Application.streamingAssetsPath + "/Types/", "Resources.json");
+        Tools.Serialize(rule, Application.streamingAssetsPath + "/Rule/", "SystemType.json");
     }
     public void GetStarTypes()
     {

@@ -1,1 +1,1 @@
-[{"slotName":"平原","minConstructionNum":5,"maxConstructionNum":10,"resources":{"金属":5,"有机物":8},"description":"平坦的土地"},{"slotName":"山脉","minConstructionNum":5,"maxConstructionNum":10,"resources":{"金属":5,"有机物":8},"description":"高耸的山脉"}]
+{"平原":{"slotName":"平原","minConstructionNum":5,"maxConstructionNum":10,"resources":{"金属":5,"有机物":8},"description":"平坦的土地"},"山脉":{"slotName":"山脉","minConstructionNum":5,"maxConstructionNum":10,"resources":{"金属":5,"有机物":8},"description":"高耸的山脉"}}
