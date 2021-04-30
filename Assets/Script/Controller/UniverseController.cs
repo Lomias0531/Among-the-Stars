@@ -43,6 +43,8 @@ public class UniverseController : BaseController<UniverseController>
 
 public class GenerateRule
 {
+    public string ruleName;
+    public string ruleType;
     public Dictionary<string, int> generateRule;
 }
 [System.Serializable]
@@ -60,6 +62,8 @@ public class PlanetType
     public string planetName = "Example";
     public int minSlotNum = 5;
     public int maxSlotNum = 10;
+    public float minStarEnergy = 0;
+    public float maxstarEnergy = 0;
     public string description;
 }
 [System.Serializable]
@@ -68,7 +72,6 @@ public class SlotType
     public string slotName = "Example";
     public int minConstructionNum = 5;
     public int maxConstructionNum = 10;
-    public Dictionary<string,int> resources = new Dictionary<string, int>();
     public string description;
 }
 [System.Serializable]

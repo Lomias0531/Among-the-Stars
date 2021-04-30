@@ -9,7 +9,7 @@ public class BasePlanet
     public List<BaseSlot> district { get; set; }
     public string planetType { get; set; }
     public float distance { get; set; }
-    public void Init(string systemName,int num)
+    public void Init(string systemName,int num,float dist)
     {
         Name = systemName + " " + Tools.intToRoman(num);
         districtCount = Random.Range(3, 15);

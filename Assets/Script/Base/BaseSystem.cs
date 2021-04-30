@@ -23,13 +23,20 @@ public class BaseSystem
         star.GetComponent<StarSysUI>().thisStarSystem = this;
         star.transform.position = new Vector3(coordX * 10, coordY * 10, coordZ * 10);
         star.name = Name;
+        StarEnergy = type.starEnergy;
         planetCount = Random.Range(0, type.maxPlanets);
         planets = new List<BasePlanet>();
+        float dis = 0;
         for (int i = 0; i < planetCount; i++)
         {
             BasePlanet planet = new BasePlanet();
-            planet.Init(Name, i);
+            planet.Init(Name, i, dis);
             planets.Add(planet);
+            dis += Random.Range(0.5f, 1.5f);
+            if (dis > type.maxDistance)
+            {
+                break;
+            }
         }
     }
     public void Init_MovePos()

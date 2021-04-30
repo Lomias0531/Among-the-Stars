@@ -23,7 +23,7 @@ public class BaseGalaxy
                 system.coordX = x;
                 system.coordY = y;
                 system.coordZ = 0;
-                string Name = Tools.getRule("SystemType");
+                string Name = Tools.getRule("StarGen");
                 StarType type = Config.Instance.starTypes[Name];
                 system.Init(type);
                 systems.Add(system);

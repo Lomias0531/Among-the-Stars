@@ -102,7 +102,7 @@ public class Tools
             Debug.Log("Rule file not found!");
             return null;
         }
-        string str = File.ReadAllText(filePath, System.Text.Encoding.Default);
+        string str = File.ReadAllText(filePath, System.Text.Encoding.UTF8);
         GenerateRule rule = JsonConvert.DeserializeObject<GenerateRule>(str);
         if(rule == null)
         {
