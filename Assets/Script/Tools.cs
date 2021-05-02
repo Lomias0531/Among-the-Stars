@@ -181,4 +181,14 @@ public class Tools
         }
         return fileList;
     }
+    public static TValue RandomValues<TKey, TValue>(IDictionary<TKey, TValue> dict)
+    {
+        System.Random rand = new System.Random();
+        List<TValue> values = Enumerable.ToList(dict.Values);
+        int size = dict.Count;
+        while (true)
+        {
+            return values[rand.Next(size)];
+        }
+    }
 }

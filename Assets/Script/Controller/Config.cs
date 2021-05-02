@@ -40,15 +40,15 @@ public class Config : BaseController<Config>
         GetSlotTypes();
         GetConstructionTypes();
     }
-    public void SaveData()
-    {
-        Tools.Serialize(starTypes, Application.streamingAssetsPath + "/Types/", "Stars.json");
-        Tools.Serialize(planetTypes, Application.streamingAssetsPath + "/Types/", "Planets.json");
-        Tools.Serialize(slotTypes, Application.streamingAssetsPath + "/Types/", "Slots.json");
-        Tools.Serialize(constructionTypes, Application.streamingAssetsPath + "/Types/", "Constructions.json");
-        Tools.Serialize(resourceTypes, Application.streamingAssetsPath + "/Types/", "Resources.json");
-        Tools.Serialize(rule, Application.streamingAssetsPath + "/Rule/", "SystemType.json");
-    }
+    //public void SaveData()
+    //{
+    //    Tools.Serialize(starTypes, Application.streamingAssetsPath + "/Types/", "Stars.json");
+    //    Tools.Serialize(planetTypes, Application.streamingAssetsPath + "/Types/", "Planets.json");
+    //    Tools.Serialize(slotTypes, Application.streamingAssetsPath + "/Types/", "Slots.json");
+    //    Tools.Serialize(constructionTypes, Application.streamingAssetsPath + "/Types/", "Constructions.json");
+    //    Tools.Serialize(resourceTypes, Application.streamingAssetsPath + "/Types/", "Resources.json");
+    //    Tools.Serialize(rule, Application.streamingAssetsPath + "/Rule/", "SystemType.json");
+    //}
     public void GetStarTypes()
     {
         string filePath = Application.streamingAssetsPath + "/Types/Stars.json";

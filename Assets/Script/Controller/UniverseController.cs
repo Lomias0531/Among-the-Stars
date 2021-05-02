@@ -52,9 +52,11 @@ public class StarType
 {
     public string starName = "Example";
     public float starEnergy = 0;
+    public float starMinEnergy = 0;
     public int maxPlanets = 10;
     public float maxDistance = 5;
     public string description;
+    public string planetGenRule;
 }
 [System.Serializable]
 public class PlanetType
@@ -65,6 +67,7 @@ public class PlanetType
     public float minStarEnergy = 0;
     public float maxstarEnergy = 0;
     public string description;
+    public string slotGenRule;
 }
 [System.Serializable]
 public class SlotType
@@ -73,6 +76,7 @@ public class SlotType
     public int minConstructionNum = 5;
     public int maxConstructionNum = 10;
     public string description;
+    public string resGenRule;
 }
 [System.Serializable]
 public class ConstructionType

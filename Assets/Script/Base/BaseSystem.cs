@@ -23,16 +23,24 @@ public class BaseSystem
         star.GetComponent<StarSysUI>().thisStarSystem = this;
         star.transform.position = new Vector3(coordX * 10, coordY * 10, coordZ * 10);
         star.name = Name;
-        StarEnergy = type.starEnergy;
+        StarEnergy = Random.Range(type.starMinEnergy, type.starEnergy);
         planetCount = Random.Range(0, type.maxPlanets);
         planets = new List<BasePlanet>();
         float dis = 0;
         for (int i = 0; i < planetCount; i++)
         {
             BasePlanet planet = new BasePlanet();
-            planet.Init(Name, i, dis);
-            planets.Add(planet);
             dis += Random.Range(0.5f, 1.5f);
+            PlanetType planetType;
+            float ene;
+            do
+            {
+                planetType = Tools.RandomValues(Config.Instance.planetTypes);
+                ene = Mathf.Clamp(StarEnergy - dis, 0, 120);
+            } while (ene < planetType.minStarEnergy || ene > planetType.maxstarEnergy);
+            planet.planetType = planetType.planetName;
+            planet.Init(Name, i, dis,planetType);
+            planets.Add(planet);
             if (dis > type.maxDistance)
             {
                 break;
