@@ -26,8 +26,14 @@ public class BaseSystem
         StarEnergy = Random.Range(type.starMinEnergy, type.starEnergy);
         planetCount = Random.Range(0, type.maxPlanets);
         planets = new List<BasePlanet>();
+
+        BasePlanet sta = new BasePlanet();
+        sta.planetType = "恒星";
+        sta.Init(this);
+        planets.Add(sta);
+
         float dis = 0;
-        for (int i = 0; i < planetCount; i++)
+        for (int i = 1; i < planetCount; i++)
         {
             BasePlanet planet = new BasePlanet();
             dis += Random.Range(0.5f, 1.5f);
@@ -35,7 +41,7 @@ public class BaseSystem
             float ene;
             do
             {
-                planetType = Tools.RandomValues(Config.Instance.planetTypes);
+                planetType = Config.Instance.planetTypes[Tools.getRule(type.planetGenRule)];
                 ene = Mathf.Clamp(StarEnergy - dis, 0, 120);
             } while (ene < planetType.minStarEnergy || ene > planetType.maxstarEnergy);
             planet.planetType = planetType.planetName;

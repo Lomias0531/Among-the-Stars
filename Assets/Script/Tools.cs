@@ -119,7 +119,12 @@ public class Tools
                 temp.Add(item.Key);
             }
         }
+        Debug.Log(Name + " " + maxCount);
         int rand = UnityEngine.Random.Range(0,maxCount);
+        if(rand > 0)
+        {
+            rand -= 1;
+        }
         return temp[rand]; 
     }
     public static void Serialize<T>(T obj, string filepath, string filename)

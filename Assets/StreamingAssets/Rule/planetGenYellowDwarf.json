@@ -1,1 +1,1 @@
-{"ruleName":"planetGenYellowDwarf","ruleType":"StarSystemPlanets","generateRule":{}}
+{"ruleName":"planetGenYellowDwarf","ruleType":"StarSystemPlanets","generateRule":{"陆地行星":6,"海洋行星":6,"气态行星":4,"熔融星球":2,"冰封行星":1}}

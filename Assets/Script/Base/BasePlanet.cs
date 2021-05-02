@@ -23,4 +23,17 @@ public class BasePlanet
             district.Add(slot);
         }
     }
+    public void Init(BaseSystem sys)
+    {
+        Name = sys.Name;
+        distance = 0;
+        districtCount = (int)sys.StarEnergy;
+        district = new List<BaseSlot>();
+        for(int i = 0;i<districtCount;i++)
+        {
+            BaseSlot slot = new BaseSlot();
+            slot.Init();
+            district.Add(slot);
+        }
+    }
 }

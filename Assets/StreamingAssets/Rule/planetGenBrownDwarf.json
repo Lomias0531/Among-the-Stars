@@ -1,1 +1,1 @@
-{"ruleName":"planetGenBrownDwarf","ruleType":"StarSystemPlanets","generateRule":{}}
+{"ruleName":"planetGenBrownDwarf","ruleType":"StarSystemPlanets","generateRule":{"陆地行星":2,"海洋行星":2,"气态行星":5,"熔融星球":1,"冰封行星":4}}

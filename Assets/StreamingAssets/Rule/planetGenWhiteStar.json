@@ -1,1 +1,1 @@
-{"ruleName":"planetGenWhiteStar","ruleType":"StarSystemPlanets","generateRule":{}}
+{"ruleName":"planetGenWhiteStar","ruleType":"StarSystemPlanets","generateRule":{"陆地行星":4,"海洋行星":4,"气态行星":3,"熔融星球":3,"冰封行星":2}}
