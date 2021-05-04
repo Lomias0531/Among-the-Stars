@@ -57,22 +57,23 @@ public class CameraController : BaseController<CameraController>
         }
         if (isRotating)
         {
+            Vector3 originalPos = focus.transform.position;
+            Quaternion originalRotation = focus.transform.rotation;
             //向右滑动时正值，向左滑动是负值。
-            transform.RotateAround(UniverseController.Instance.Focus, new Vector3(0,1f,0), arcSpeed * Input.GetAxis("Mouse X"));
+            //transform.RotateAround(UniverseController.Instance.Focus, new Vector3(0,1f,0), arcSpeed * Input.GetAxis("Mouse X"));
+            focus.transform.localEulerAngles = new Vector3(focus.transform.localEulerAngles.x - arcSpeed * Input.GetAxis("Mouse Y"), focus.transform.localEulerAngles.y + arcSpeed * Input.GetAxis("Mouse X"), focus.transform.localEulerAngles.z);
 
-            Vector3 originalPos = transform.position;
-            Quaternion originalRotation = transform.rotation;
+            //transform.RotateAround(UniverseController.Instance.Focus, new Vector3(1f, 0, 0), -arcSpeed * Input.GetAxis("Mouse Y"));
+            //focus.transform.Rotate(new Vector3(1f, 0, 0), -arcSpeed * Input.GetAxis("Mouse Y"));
 
-            transform.RotateAround(UniverseController.Instance.Focus, new Vector3(1f, 0, 0), -arcSpeed * Input.GetAxis("Mouse Y"));
-
-            transform.LookAt(UniverseController.Instance.Focus);
+            transform.LookAt(focus.transform);
 
             //限制摄像机垂直滑动的距离；
-            float x = transform.eulerAngles.x;
-            if (x < 10 || x > 40)//当超出范围之后，我们将属性归位原来的，就是让旋转无效；
+            float x = focus.transform.localEulerAngles.x;
+            if (x < 0 || x > 60)//当超出范围之后，我们将属性归位原来的，就是让旋转无效；
             {
-                transform.position = originalPos;
-                transform.rotation = originalRotation;
+                focus.transform.position = originalPos;
+                focus.transform.rotation = originalRotation;
             }
 
 
