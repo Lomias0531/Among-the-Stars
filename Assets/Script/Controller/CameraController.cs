@@ -38,14 +38,14 @@ public class CameraController : BaseController<CameraController>
         {
             Camera.main.fieldOfView -= moveSpeed;
         }
-        ScrollView();
+        //ScrollView();
         RotateView();
     }
-    private void ScrollView()
-    {
-        distance = 10;
-        offsetPosition = offsetPosition.normalized * distance;//方向不变，将长度变为distance
-    }
+    //private void ScrollView()
+    //{
+    //    distance = 10;
+    //    offsetPosition = offsetPosition.normalized * distance;//方向不变，将长度变为distance
+    //}
     void RotateView()
     {
         if (Input.GetMouseButtonUp(1))//1代表鼠标左键。
@@ -108,6 +108,6 @@ public class CameraController : BaseController<CameraController>
         }
         focus.transform.position = new Vector3(focus.transform.position.x, t, focus.transform.position.z);
         //每次更新一下。
-        offsetPosition = transform.position - UniverseController.Instance.Focus;
+        //offsetPosition = transform.position - UniverseController.Instance.Focus;
     }
 }
