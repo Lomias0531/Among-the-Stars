@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : BaseController<CameraController>
 {
     //public float viewDistance;
     float maxDistance = 60;
@@ -12,6 +12,7 @@ public class CameraController : MonoBehaviour
     float y;
     public float arcSpeed = 1f;
     public Vector2 lastMousePos;
+    public GameObject focus;
 
     float distance;
     Vector3 offsetPosition;

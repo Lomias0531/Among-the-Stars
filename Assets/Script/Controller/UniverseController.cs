@@ -37,7 +37,9 @@ public class UniverseController : BaseController<UniverseController>
             z += item.star.transform.position.z;
         }
         Focus = new Vector3(x / universe[0].systemCount, y / universe[0].systemCount, z / universe[0].systemCount);
-        Camera.main.transform.position = new Vector3(Focus.x, Focus.y + 2, Focus.z - 10);
+        CameraController.Instance.focus.transform.position = Focus;
+        Camera.main.transform.position = new Vector3(Focus.x, Focus.y + 3, Focus.z - 10);
+        Camera.main.transform.LookAt(Focus);
     }
 }
 
