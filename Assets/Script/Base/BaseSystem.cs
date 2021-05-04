@@ -21,7 +21,7 @@ public class BaseSystem
         Init_MovePos();
         star = (GameObject)GameObject.Instantiate(Resources.Load("Prefab/Star"));
         star.GetComponent<StarSysUI>().thisStarSystem = this;
-        star.transform.position = new Vector3(coordX * 10, coordY * 10, coordZ * 10);
+        star.transform.position = new Vector3(coordX * 25, coordY * 25, coordZ * 25);
         star.name = Name;
         StarEnergy = Random.Range(type.starMinEnergy, type.starEnergy);
         planetCount = Random.Range(0, type.maxPlanets);

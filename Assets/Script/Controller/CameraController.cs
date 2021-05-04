@@ -76,9 +76,25 @@ public class CameraController : BaseController<CameraController>
                 focus.transform.rotation = originalRotation;
             }
 
-
-
         }
+        float t = focus.transform.position.y;
+        if (Input.GetKey("a"))
+        {
+            focus.transform.Translate(new Vector3(-0.01f, 0, 0), Space.Self);
+        }
+        if (Input.GetKey("d"))
+        {
+            focus.transform.Translate(new Vector3(0.01f, 0, 0), Space.Self);
+        }
+        if (Input.GetKey("w"))
+        {
+            focus.transform.Translate(new Vector3(0, 0, 0.01f), Space.Self);
+        }
+        if (Input.GetKey("s"))
+        {
+            focus.transform.Translate(new Vector3(0, 0, -0.01f), Space.Self);
+        }
+        focus.transform.position = new Vector3(focus.transform.position.x, t, focus.transform.position.z);
         //每次更新一下。
         offsetPosition = transform.position - UniverseController.Instance.Focus;
     }
