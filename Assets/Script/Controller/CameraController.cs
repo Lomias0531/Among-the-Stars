@@ -17,6 +17,7 @@ public class CameraController : BaseController<CameraController>
     float distance;
     Vector3 offsetPosition;
     bool isRotating;
+    bool isDraging;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,16 +56,20 @@ public class CameraController : BaseController<CameraController>
         {
             isRotating = true;
         }
+        if(Input.GetMouseButtonDown(2))
+        {
+            isDraging = true;
+        }
+        if(Input.GetMouseButtonUp(2))
+        {
+            isDraging = false;
+        }
         if (isRotating)
         {
             Vector3 originalPos = focus.transform.position;
             Quaternion originalRotation = focus.transform.rotation;
             //向右滑动时正值，向左滑动是负值。
-            //transform.RotateAround(UniverseController.Instance.Focus, new Vector3(0,1f,0), arcSpeed * Input.GetAxis("Mouse X"));
             focus.transform.localEulerAngles = new Vector3(focus.transform.localEulerAngles.x - arcSpeed * Input.GetAxis("Mouse Y"), focus.transform.localEulerAngles.y + arcSpeed * Input.GetAxis("Mouse X"), focus.transform.localEulerAngles.z);
-
-            //transform.RotateAround(UniverseController.Instance.Focus, new Vector3(1f, 0, 0), -arcSpeed * Input.GetAxis("Mouse Y"));
-            //focus.transform.Rotate(new Vector3(1f, 0, 0), -arcSpeed * Input.GetAxis("Mouse Y"));
 
             transform.LookAt(focus.transform);
 
@@ -78,21 +83,28 @@ public class CameraController : BaseController<CameraController>
 
         }
         float t = focus.transform.position.y;
-        if (Input.GetKey("a"))
+        if (isDraging)
         {
-            focus.transform.Translate(new Vector3(-0.01f, 0, 0), Space.Self);
+            focus.transform.Translate(new Vector3(Input.GetAxis("Mouse X") * -0.1f, 0f, Input.GetAxis("Mouse Y") * -0.1f),Space.Self);
         }
-        if (Input.GetKey("d"))
+        else
         {
-            focus.transform.Translate(new Vector3(0.01f, 0, 0), Space.Self);
-        }
-        if (Input.GetKey("w"))
-        {
-            focus.transform.Translate(new Vector3(0, 0, 0.01f), Space.Self);
-        }
-        if (Input.GetKey("s"))
-        {
-            focus.transform.Translate(new Vector3(0, 0, -0.01f), Space.Self);
+            if (Input.GetKey("a"))
+            {
+                focus.transform.Translate(new Vector3(-0.01f, 0, 0), Space.Self);
+            }
+            if (Input.GetKey("d"))
+            {
+                focus.transform.Translate(new Vector3(0.01f, 0, 0), Space.Self);
+            }
+            if (Input.GetKey("w"))
+            {
+                focus.transform.Translate(new Vector3(0, 0, 0.01f), Space.Self);
+            }
+            if (Input.GetKey("s"))
+            {
+                focus.transform.Translate(new Vector3(0, 0, -0.01f), Space.Self);
+            }
         }
         focus.transform.position = new Vector3(focus.transform.position.x, t, focus.transform.position.z);
         //每次更新一下。
