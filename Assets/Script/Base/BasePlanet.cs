@@ -13,7 +13,7 @@ public class BasePlanet
     {
         Name = systemName + " " + Tools.intToRoman(num);
         distance = dist;
-        districtCount = Random.Range(3, 15);
+        districtCount = Random.Range(type.minSlotNum, type.maxSlotNum);
         district = new List<BaseSlot>();
         for(int i = 0;i<districtCount;i++)
         {
@@ -27,7 +27,7 @@ public class BasePlanet
     {
         Name = sys.Name;
         distance = 0;
-        districtCount = (int)sys.StarEnergy;
+        districtCount = (int)sys.StarEnergy * 2;
         district = new List<BaseSlot>();
         for(int i = 0;i<districtCount;i++)
         {
