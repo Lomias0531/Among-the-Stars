@@ -16,6 +16,7 @@ public class UIController : BaseController<UIController>
     public UniverseController universeController;
     //public GameObject GalaticalMap;
     public GameObject StarSystemSelection;
+    public GameObject PlanetSelection;
     public GameObject DisplayInfo;
     public GameObject StarSystemSight;
     public GameObject PlanetSight;
@@ -34,6 +35,10 @@ public class UIController : BaseController<UIController>
     List<GameObject> starSystemFleets;
 
     //行星视图
+    [Header("行星视图")]
+    public GameObject slot;
+    public Transform slotsContainer;
+    List<GameObject> planetSlots;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -43,9 +48,12 @@ public class UIController : BaseController<UIController>
     {
         StarSystemSelection = Instantiate((GameObject)Resources.Load("Prefab/StarSystemSelection"));
         StarSystemSelection.transform.SetParent(GameObject.Find("Canvas").transform);
+        PlanetSelection = Instantiate((GameObject)Resources.Load("Prefab/PlanetSelection"));
+        PlanetSelection.transform.SetParent(StarSystemSight.transform);
         DisplayInfo = Instantiate((GameObject)Resources.Load("Prefab/DisplayInfo"));
         DisplayInfo.transform.SetParent(GameObject.Find("Canvas").transform);
         StarSystemSelection.SetActive(false);
+        PlanetSelection.SetActive(false);
         DisplayInfo.transform.localScale = new Vector3(1, 0, 1);
         universeController = UniverseController.Instance;
         curSight = SightStatus.Galaxy;
@@ -70,6 +78,7 @@ public class UIController : BaseController<UIController>
                         if(curStarSystem != null)
                         {
                             InitStarSystemSight(curStarSystem);
+                            UndeployInfoDisplay();
                         }else
                         {
                             return;
@@ -165,18 +174,35 @@ public class UIController : BaseController<UIController>
         curStarSystem = null;
         DisplayInfo.transform.DOScaleY(0, 0.1f);
     }
+    public void EnablePlanetSelection(Vector3 pos,BasePlanet planet)
+    {
+        if(curSight == SightStatus.StarSystem)
+        {
+            PlanetSelection.SetActive(true);
+            PlanetSelection.transform.position = pos;
+            curPlanet = planet;
+        }
+    }
+    public void DisablePlanetSelection()
+    {
+        PlanetSelection.SetActive(false);
+        curPlanet = null;
+    }
     public void SwitchSight(SightStatus sight)
     {
         switch(sight)
         {
             case SightStatus.Galaxy:
                 {
+                    universeController.systemContainer.SetActive(true);
                     curStarSystem = null;
                     StarSystemSight.SetActive(false);
                     break;
                 }
             case SightStatus.StarSystem:
                 {
+                    universeController.systemContainer.SetActive(false);
+                    StarSystemSelection.SetActive(false);
                     curPlanet = null;
                     PlanetSight.SetActive(false);
                     StarSystemSight.SetActive(true);
@@ -212,9 +238,10 @@ public class UIController : BaseController<UIController>
             tex.LoadImage(bytes);
             plt.GetComponent<Image>().sprite = Sprite.Create(tex,new Rect(0,0,100,100),new Vector2(0.5f,0.5f));
             plt.transform.SetParent(planetsContainer);
-            plt.transform.localPosition = new Vector2(_planet.distance * 100f, 0f);
+            plt.transform.localPosition = new Vector2((_planet.distance == 0 ? _planet.distance : _planet.distance + 1) * 100f, 0f);
             plt.transform.localScale = new Vector2(_planet.districtCount / 25f, _planet.districtCount / 25f);
             starSystemPlanets.Add(plt);
+            plt.AddComponent<PlanetUI>().thisPlanet = _planet;
         }
     }
     void InitPlanetSight(BasePlanet planet)

@@ -20,6 +20,7 @@ public class BaseSystem
         systemType = type.starName;
         Init_MovePos();
         star = (GameObject)GameObject.Instantiate(Resources.Load("Prefab/Star"));
+        star.transform.SetParent(UniverseController.Instance.systemContainer.transform);
         star.GetComponent<StarSysUI>().thisStarSystem = this;
         star.transform.position = new Vector3(coordX * 25, coordY * 25, coordZ * 25);
         star.name = Name;

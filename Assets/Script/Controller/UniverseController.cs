@@ -5,6 +5,7 @@ using UnityEngine;
 public class UniverseController : BaseController<UniverseController>
 {
     public List<BaseGalaxy> universe { get; set; }
+    public GameObject systemContainer;
     public Vector3 Focus;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class UniverseController : BaseController<UniverseController>
     }
     public void Init()
     {
+        systemContainer = GameObject.Find("StarSystems");
         int galaxycount = Random.Range(1, 1);
         universe = new List<BaseGalaxy>();
         for(int i = 0;i<galaxycount;i++)
