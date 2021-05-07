@@ -1,1 +1,1 @@
-{"ruleName":"slotGenLand","ruleType":"PlanetSlot","generateRule":{}}
+{"ruleName":"slotGenLand","ruleType":"PlanetSlot","generateRule":{"平原":3,"山脉":2,"海洋":4,"森林":1,"沼泽":1}}

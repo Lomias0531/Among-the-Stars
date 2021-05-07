@@ -52,6 +52,7 @@ public class BasePlanet
                 } while (!district.ContainsKey(new Vector2(reX, reY)));
             } while (district[new Vector2(reX, reY)].enabled == true);
             district[new Vector2(reX, reY)].enabled = true;
+            district[new Vector2(reX, reY)].slotType = Tools.getRule(type.slotGenRule);
         }
     }
     public void Init(BaseSystem sys)
@@ -96,6 +97,7 @@ public class BasePlanet
                 } while (!district.ContainsKey(new Vector2(reX, reY)));
             } while (district[new Vector2(reX, reY)].enabled == true);
             district[new Vector2(reX, reY)].enabled = true;
+            district[new Vector2(reX, reY)].slotType = "恒星物质";
         }
     }
 }

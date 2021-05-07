@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using System.IO;
+using System.Linq;
 
 public enum SightStatus
 {
@@ -287,6 +288,8 @@ public class UIController : BaseController<UIController>
             }else
             {
                 slt.AddComponent<SlotUI>().thisSlot = plt.Value;
+                int col = Config.Instance.slotTypes.Keys.ToList().IndexOf(plt.Value.slotType);
+                slt.GetComponent<Image>().color = Config.Instance.colorDic[col];
             }
             planetSlots.Add(slt);
         }
