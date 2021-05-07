@@ -232,7 +232,7 @@ public class UIController : BaseController<UIController>
         starSystemFleets.Clear();
         foreach (var _planet in sys.planets)
         {
-            GameObject plt = GameObject.Instantiate(Resources.Load<GameObject>("Prefab/Planet"));
+            GameObject plt = GameObject.Instantiate(planet);
             byte[] bytes = File.ReadAllBytes(Application.streamingAssetsPath.Replace("StreamingAssets", "Resources") + "/Image/PlanetPic/" + _planet.planetType + ".png");
             Texture2D tex = new Texture2D(100, 100);
             tex.LoadImage(bytes);
@@ -248,5 +248,19 @@ public class UIController : BaseController<UIController>
     {
         SwitchSight(SightStatus.Planet);
         curSight = SightStatus.Planet;
+        foreach (var plt in planet.district)
+        {
+            GameObject slt = GameObject.Instantiate(slot);
+            slt.transform.SetParent(slotsContainer);
+            float curX = 0;
+            float curY = 0;
+            if (plt.Key.x % 2 != 0)
+            {
+                curY = 13;
+            }
+            curX += plt.Key.x * 22.5f;
+            curY += plt.Key.y * 26;
+            slt.transform.localPosition = new Vector2(curX, curY);
+        }
     }
 }

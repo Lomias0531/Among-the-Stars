@@ -20,14 +20,27 @@ public class BasePlanet
         {
             for (int y = -10; y <= 10; y++)
             {
-
+                float curX = 0;
+                float curY = 0;
+                if (x % 2 != 0)
+                {
+                    curY = 13;
+                }
+                curX += x * 22.5f;
+                curY += y * 26;
+                if (Mathf.Sqrt(Mathf.Pow(curX, 2) + Mathf.Pow(curY, 2)) > 280)
+                {
+                    continue;
+                }
+                BaseSlot slot = new BaseSlot();
+                district.Add(new Vector2(x, y), slot);
             }
         }
         for (int i = 0; i < districtCount; i++)
         {
-            BaseSlot slot = new BaseSlot();
+            //BaseSlot slot = new BaseSlot();
             //slot.slotType = Tools.getRule(planetType);
-            slot.Init();
+            //slot.Init();
             //district.Add(slot);
         }
     }
