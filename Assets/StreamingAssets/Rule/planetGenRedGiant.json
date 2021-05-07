@@ -1,1 +1,1 @@
-{"ruleName":"planetGenRedGiant","ruleType":"StarSystemPlanets","generateRule":{"陆地行星":5,"海洋行星":5,"气态行星":3,"熔融星球":3,"冰封行星":2}}
+{"ruleName":"planetGenRedGiant","ruleType":"StarSystemPlanets","generateRule":{"陆地行星":3,"海洋行星":3,"气态行星":2,"熔融星球":5,"冰封行星":4}}

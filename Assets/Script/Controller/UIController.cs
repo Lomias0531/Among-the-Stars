@@ -59,6 +59,7 @@ public class UIController : BaseController<UIController>
         curSight = SightStatus.Galaxy;
         starSystemPlanets = new List<GameObject>();
         starSystemFleets = new List<GameObject>();
+        planetSlots = new List<GameObject>();
     }
 
     // Update is called once per frame 
@@ -188,6 +189,14 @@ public class UIController : BaseController<UIController>
         PlanetSelection.SetActive(false);
         curPlanet = null;
     }
+    public void EnableSlotSelection(Vector3 pos,BaseSlot slot)
+    {
+
+    }
+    public void DisableSlotSelection()
+    {
+
+    }
     public void SwitchSight(SightStatus sight)
     {
         switch(sight)
@@ -210,6 +219,7 @@ public class UIController : BaseController<UIController>
                 }
             case SightStatus.Planet:
                 {
+                    PlanetSelection.SetActive(false);
                     StarSystemSight.SetActive(false);
                     PlanetSight.SetActive(true);
                     break;
@@ -248,6 +258,11 @@ public class UIController : BaseController<UIController>
     {
         SwitchSight(SightStatus.Planet);
         curSight = SightStatus.Planet;
+        foreach (var item in planetSlots)
+        {
+            Destroy(item);
+        }
+        planetSlots.Clear();
         foreach (var plt in planet.district)
         {
             GameObject slt = GameObject.Instantiate(slot);
@@ -261,6 +276,11 @@ public class UIController : BaseController<UIController>
             curX += plt.Key.x * 22.5f;
             curY += plt.Key.y * 26;
             slt.transform.localPosition = new Vector2(curX, curY);
+            if(!plt.Value.enabled)
+            {
+                slt.GetComponent<Image>().color = Color.gray;
+            }
+            planetSlots.Add(slt);
         }
     }
 }

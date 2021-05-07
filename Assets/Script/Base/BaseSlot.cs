@@ -9,6 +9,7 @@ public class BaseSlot
     public float coordX { get; set; }
     public float coordY { get; set; }
     public string slotType { get; set; }
+    public bool enabled { get; set; }
     public void Init()
     {
         Name = Tools.GetRandomName(3, 5) + " " + Tools.GetRandomName(4, 8);

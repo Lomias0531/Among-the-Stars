@@ -28,20 +28,30 @@ public class BasePlanet
                 }
                 curX += x * 22.5f;
                 curY += y * 26;
-                if (Mathf.Sqrt(Mathf.Pow(curX, 2) + Mathf.Pow(curY, 2)) > 280)
-                {
-                    continue;
-                }
+                //if (Mathf.Sqrt(Mathf.Pow(curX, 2) + Mathf.Pow(curY, 2)) > 280)
+                //{
+                //    continue;
+                //}
                 BaseSlot slot = new BaseSlot();
+                slot.enabled = false;
                 district.Add(new Vector2(x, y), slot);
             }
         }
+        int rangeX = (int)Mathf.Clamp((12f * (districtCount / 20f)) + 1, 0, 12f);
+        int rangeY = (int)Mathf.Clamp((10f * (districtCount / 20f)) + 1, 0, 10f);
+        int reX;
+        int reY;
         for (int i = 0; i < districtCount; i++)
         {
-            //BaseSlot slot = new BaseSlot();
-            //slot.slotType = Tools.getRule(planetType);
-            //slot.Init();
-            //district.Add(slot);
+            do
+            {
+                do
+                {
+                    reX = Random.Range(-rangeX, rangeX);
+                    reY = Random.Range(-rangeY, rangeY);
+                } while (!district.ContainsKey(new Vector2(reX, reY)));
+            } while (district[new Vector2(reX, reY)].enabled == true);
+            district[new Vector2(reX, reY)].enabled = true;
         }
     }
     public void Init(BaseSystem sys)
@@ -50,11 +60,42 @@ public class BasePlanet
         distance = 0;
         districtCount = (int)sys.StarEnergy * 2;
         district = new Dictionary<Vector2, BaseSlot>();
-        for(int i = 0;i<districtCount;i++)
+        for (int x = -12; x <= 12; x++)
         {
-            BaseSlot slot = new BaseSlot();
-            slot.Init();
-            //district.Add(slot);
+            for (int y = -10; y <= 10; y++)
+            {
+                float curX = 0;
+                float curY = 0;
+                if (x % 2 != 0)
+                {
+                    curY = 13;
+                }
+                curX += x * 22.5f;
+                curY += y * 26;
+                //if (Mathf.Sqrt(Mathf.Pow(curX, 2) + Mathf.Pow(curY, 2)) > 280)
+                //{
+                //    continue;
+                //}
+                BaseSlot slot = new BaseSlot();
+                slot.enabled = false;
+                district.Add(new Vector2(x, y), slot);
+            }
+        }
+        int rangeX = (int)Mathf.Clamp((12f * (districtCount / 50f)) + 1, 0, 12f);
+        int rangeY = (int)Mathf.Clamp((10f * (districtCount / 50f)) + 1, 0, 10f);
+        int reX;
+        int reY;
+        for (int i = 0; i < districtCount; i++)
+        {
+            do
+            {
+                do
+                {
+                    reX = Random.Range(-rangeX, rangeX);
+                    reY = Random.Range(-rangeY, rangeY);
+                } while (!district.ContainsKey(new Vector2(reX, reY)));
+            } while (district[new Vector2(reX, reY)].enabled == true);
+            district[new Vector2(reX, reY)].enabled = true;
         }
     }
 }
