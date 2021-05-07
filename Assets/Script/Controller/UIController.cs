@@ -17,6 +17,7 @@ public class UIController : BaseController<UIController>
     //public GameObject GalaticalMap;
     public GameObject StarSystemSelection;
     public GameObject PlanetSelection;
+    public GameObject SlotSelection;
     public GameObject DisplayInfo;
     public GameObject StarSystemSight;
     public GameObject PlanetSight;
@@ -50,10 +51,13 @@ public class UIController : BaseController<UIController>
         StarSystemSelection.transform.SetParent(GameObject.Find("Canvas").transform);
         PlanetSelection = Instantiate((GameObject)Resources.Load("Prefab/PlanetSelection"));
         PlanetSelection.transform.SetParent(StarSystemSight.transform);
+        SlotSelection = Instantiate((GameObject)Resources.Load("Prefab/SlotSelection"));
+        SlotSelection.transform.SetParent(slotsContainer.transform);
         DisplayInfo = Instantiate((GameObject)Resources.Load("Prefab/DisplayInfo"));
         DisplayInfo.transform.SetParent(GameObject.Find("Canvas").transform);
         StarSystemSelection.SetActive(false);
         PlanetSelection.SetActive(false);
+        SlotSelection.SetActive(false);
         DisplayInfo.transform.localScale = new Vector3(1, 0, 1);
         universeController = UniverseController.Instance;
         curSight = SightStatus.Galaxy;
@@ -191,11 +195,12 @@ public class UIController : BaseController<UIController>
     }
     public void EnableSlotSelection(Vector3 pos,BaseSlot slot)
     {
-
+        SlotSelection.SetActive(true);
+        SlotSelection.transform.position = pos;
     }
     public void DisableSlotSelection()
     {
-
+        SlotSelection.SetActive(false);
     }
     public void SwitchSight(SightStatus sight)
     {
@@ -279,8 +284,12 @@ public class UIController : BaseController<UIController>
             if(!plt.Value.enabled)
             {
                 slt.GetComponent<Image>().color = Color.gray;
+            }else
+            {
+                slt.AddComponent<SlotUI>().thisSlot = plt.Value;
             }
             planetSlots.Add(slt);
         }
+        SlotSelection.transform.SetAsLastSibling();
     }
 }
