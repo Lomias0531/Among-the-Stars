@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SlotUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class SlotUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
     public BaseSlot thisSlot;
     // Start is called before the first frame update
@@ -25,5 +25,10 @@ public class SlotUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         UIController.Instance.DisableSlotSelection();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        
     }
 }

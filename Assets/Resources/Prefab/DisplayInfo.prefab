@@ -691,6 +691,9 @@ MonoBehaviour:
   txt_SystemName: {fileID: 239795389000434376}
   txt_SystenType: {fileID: 8607609288695197325}
   txt_SystemInfo: {fileID: 8389056444124993692}
+  txt_Name: {fileID: 3726638285558342957}
+  txt_Type: {fileID: 626907306019159649}
+  txt_Info: {fileID: 2970128491696082031}
 --- !u!1 &5918003908595523233
 GameObject:
   m_ObjectHideFlags: 0

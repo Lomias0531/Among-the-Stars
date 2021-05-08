@@ -96,6 +96,7 @@ public class UIController : BaseController<UIController>
                         if(curPlanet != null)
                         {
                             InitPlanetSight(curPlanet);
+                            UnDeployPlanetInfo();
                         }else
                         {
                             return;
@@ -144,22 +145,6 @@ public class UIController : BaseController<UIController>
         {
             StarSystemSelection.SetActive(true);
             StarSystemSelection.transform.position = pos;
-            if (pos.x < 135)
-            {
-                pos.x = 140;
-            }
-            if (pos.x > Screen.width - 135)
-            {
-                pos.x = Screen.width - 140;
-            }
-            if (pos.y < 210)
-            {
-                pos.y = 215;
-            }
-            if (pos.y > Screen.height - 210)
-            {
-                pos.y = Screen.height - 215;
-            }
             DisplayInfo.transform.position = pos;
             DeployInfoDisplay(sys);
         }
@@ -186,13 +171,25 @@ public class UIController : BaseController<UIController>
         {
             PlanetSelection.SetActive(true);
             PlanetSelection.transform.position = pos;
-            curPlanet = planet;
+            DisplayInfo.transform.position = pos;
+            DeployPlanetInfo(planet);
         }
     }
     public void DisablePlanetSelection()
     {
         PlanetSelection.SetActive(false);
+        UnDeployPlanetInfo();
+    }
+    void DeployPlanetInfo(BasePlanet planet)
+    {
+        curPlanet = planet;
+        DisplayInfo.GetComponent<InfoDisplay>().InitInfo(planet);
+        DisplayInfo.transform.DOScaleY(1, 0.1f);
+    }
+    void UnDeployPlanetInfo()
+    {
         curPlanet = null;
+        DisplayInfo.transform.DOScaleY(0, 0.1f);
     }
     public void EnableSlotSelection(Vector3 pos,BaseSlot slot)
     {
