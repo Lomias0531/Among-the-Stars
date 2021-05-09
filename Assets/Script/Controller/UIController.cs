@@ -15,10 +15,9 @@ public enum SightStatus
 public class UIController : BaseController<UIController>
 {
     public UniverseController universeController;
+    [Header("银河系视图")]
     //public GameObject GalaticalMap;
     public GameObject StarSystemSelection;
-    public GameObject PlanetSelection;
-    public GameObject SlotSelection;
     public GameObject DisplayInfo;
     public GameObject StarSystemSight;
     public GameObject PlanetSight;
@@ -30,6 +29,7 @@ public class UIController : BaseController<UIController>
 
     //恒星系视图
     [Header("恒星系视图")]
+    public GameObject PlanetSelection;
     public GameObject planet;
     public Transform planetsContainer;
     public Transform fleetsContainer;
@@ -38,23 +38,35 @@ public class UIController : BaseController<UIController>
 
     //行星视图
     [Header("行星视图")]
+    public GameObject SlotSelection;
     public GameObject slot;
     public Transform slotsContainer;
     List<GameObject> planetSlots;
+    public InputField slotName;
+    public InputField slotType;
+    public Button btn_SlotResources;
+    public Button btn_SlotConstructions;
+    public Button btn_SlotTroops;
+    public GameObject ConsContainer;
+    public GameObject TroopsContainer;
+    public GameObject ResContainer;
+    bool isSlotSelected;
+    List<GameObject> constructions;
+    public GameObject ConsPrefab;
     // Start is called before the first frame update
     void OnEnable()
     {
-
+        KeyBindings();
     }
     public void Init()
     {
-        StarSystemSelection = Instantiate((GameObject)Resources.Load("Prefab/StarSystemSelection"));
+        StarSystemSelection = Instantiate(StarSystemSelection);
         StarSystemSelection.transform.SetParent(GameObject.Find("Canvas").transform);
-        PlanetSelection = Instantiate((GameObject)Resources.Load("Prefab/PlanetSelection"));
+        PlanetSelection = Instantiate(PlanetSelection);
         PlanetSelection.transform.SetParent(StarSystemSight.transform);
-        SlotSelection = Instantiate((GameObject)Resources.Load("Prefab/SlotSelection"));
+        SlotSelection = Instantiate(SlotSelection);
         SlotSelection.transform.SetParent(slotsContainer.transform);
-        DisplayInfo = Instantiate((GameObject)Resources.Load("Prefab/DisplayInfo"));
+        DisplayInfo = Instantiate(DisplayInfo);
         DisplayInfo.transform.SetParent(GameObject.Find("Canvas").transform);
         StarSystemSelection.SetActive(false);
         PlanetSelection.SetActive(false);
@@ -65,6 +77,13 @@ public class UIController : BaseController<UIController>
         starSystemPlanets = new List<GameObject>();
         starSystemFleets = new List<GameObject>();
         planetSlots = new List<GameObject>();
+        constructions = new List<GameObject>();
+    }
+    void KeyBindings()
+    {
+        btn_SlotConstructions.onClick.AddListener(TriggerSlotConsPanel);
+        btn_SlotTroops.onClick.AddListener(TriggerSlotTroopsPanel);
+        btn_SlotResources.onClick.AddListener(TriggerSlotResPanel);
     }
 
     // Update is called once per frame 
@@ -107,11 +126,27 @@ public class UIController : BaseController<UIController>
                     {
                         if(curSlot != null)
                         {
-
+                            isSlotSelected = true;
+                            displaySlotDetail();
                         }else
                         {
                             return;
                         }
+                        break;
+                    }
+            }
+        }
+        if(Input.GetMouseButtonDown(1))
+        {
+            switch(curSight)
+            {
+                case SightStatus.Planet:
+                    {
+                        isSlotSelected = false;
+                        curSlot = null;
+                        DisableSlotSelection();
+                        UnloadSlotInfo();
+                        UnloadSlotDetail();
                         break;
                     }
             }
@@ -193,12 +228,21 @@ public class UIController : BaseController<UIController>
     }
     public void EnableSlotSelection(Vector3 pos,BaseSlot slot)
     {
-        SlotSelection.SetActive(true);
-        SlotSelection.transform.position = pos;
+        if(!isSlotSelected)
+        {
+            SlotSelection.SetActive(true);
+            SlotSelection.transform.position = pos;
+            curSlot = slot;
+            TriggerSlotInfo(slot);
+        }
     }
     public void DisableSlotSelection()
     {
-        SlotSelection.SetActive(false);
+        if(!isSlotSelected)
+        {
+            SlotSelection.SetActive(false);
+            UnloadSlotInfo();
+        }
     }
     public void SwitchSight(SightStatus sight)
     {
@@ -291,5 +335,50 @@ public class UIController : BaseController<UIController>
             planetSlots.Add(slt);
         }
         SlotSelection.transform.SetAsLastSibling();
+    }
+    void TriggerSlotInfo(BaseSlot slot)
+    {
+        slotName.text = slot.Name;
+        slotType.text = slot.slotType;
+    }
+    void UnloadSlotInfo()
+    {
+        slotName.text = "";
+        slotType.text = "";
+    }
+    void displaySlotDetail()
+    {
+        foreach (var item in constructions)
+        {
+            Destroy(item);
+        }
+        constructions.Clear();
+        foreach (var cons in curSlot.buildings)
+        {
+            GameObject construction = Instantiate(ConsPrefab);
+            construction.transform.SetParent(ConsContainer.transform);
+            constructions.Add(construction);
+            construction.GetComponent<ConsUI>().InitCons(cons);
+        }
+    }
+    void UnloadSlotDetail()
+    {
+        foreach (var item in constructions)
+        {
+            Destroy(item);
+        }
+        constructions.Clear();
+    }
+    void TriggerSlotConsPanel()
+    {
+        ConsContainer.transform.SetAsLastSibling();
+    }
+    void TriggerSlotTroopsPanel()
+    {
+        TroopsContainer.transform.SetAsLastSibling();
+    }
+    void TriggerSlotResPanel()
+    {
+        ResContainer.transform.SetAsLastSibling();
     }
 }
