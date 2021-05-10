@@ -52,7 +52,7 @@ public class BasePlanet
                 } while (!district.ContainsKey(new Vector2(reX, reY)));
             } while (district[new Vector2(reX, reY)].enabled == true);
             district[new Vector2(reX, reY)].enabled = true;
-            district[new Vector2(reX, reY)].slotType = Tools.getRule(type.slotGenRule);
+            district[new Vector2(reX, reY)].slotType = Tools.GetPlanetSlotRule(type.slotGenRule);
             district[new Vector2(reX, reY)].Init(Config.Instance.slotTypes[district[new Vector2(reX, reY)].slotType]);
         }
     }

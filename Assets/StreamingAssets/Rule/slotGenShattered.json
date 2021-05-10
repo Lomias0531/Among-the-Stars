@@ -1,1 +1,1 @@
-{"ruleName":"slotGenShattered","ruleType":"PlanetSlot","generateRule":{"虚空":12,"山脉":1}}
+{"ruleName":"slotGenShattered","ruleType":"PlanetSlot","rules":[{"SlotName":"虚空","minHeight":0,"maxHeight":1,"weight":1}]}

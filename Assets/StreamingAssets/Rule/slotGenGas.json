@@ -1,1 +1,1 @@
-{"ruleName":"slotGenGas","ruleType":"PlanetSlot","generateRule":{"旋风":6,"风井":1}}
+{"ruleName":"slotGenGas","ruleType":"PlanetSlot","rules":[{"SlotName":"旋风","minHeight":-5,"maxHeight":-1,"weight":1},{"SlotName":"风井","minHeight":-1,"maxHeight":0,"weight":1}]}

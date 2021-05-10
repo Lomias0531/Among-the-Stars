@@ -127,6 +127,39 @@ public class Tools
         }
         return temp[rand]; 
     }
+    public static string GetPlanetSlotRule(string Name)
+    {
+        string filePath = Application.streamingAssetsPath + "/Rule/" + Name + ".json";
+        if (!File.Exists(filePath))
+        {
+            Debug.Log("Rule file not found!");
+            return null;
+        }
+        string str = File.ReadAllText(filePath, System.Text.Encoding.UTF8);
+        PlanetSlotGenerateRule rule = JsonConvert.DeserializeObject<PlanetSlotGenerateRule>(str);
+        if (rule == null)
+        {
+            Debug.Log("Rule file not correct!");
+            return null;
+        }
+        int maxCount = 0;
+        List<string> temp = new List<string>();
+        foreach (var item in rule.rules)
+        {
+            maxCount += item.weight;
+            for (int i = 0; i < item.weight; i++)
+            {
+                temp.Add(item.SlotName);
+            }
+        }
+        Debug.Log(Name + " " + maxCount);
+        int rand = UnityEngine.Random.Range(0, maxCount);
+        if (rand > 0)
+        {
+            rand -= 1;
+        }
+        return temp[rand];
+    }
     public static void Serialize<T>(T obj, string filepath, string filename)
     {
         string json = JsonConvert.SerializeObject(obj);

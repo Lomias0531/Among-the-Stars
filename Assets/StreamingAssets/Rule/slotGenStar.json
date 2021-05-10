@@ -1,1 +1,1 @@
-{"ruleName":"slotGenStar","ruleType":"PlanetSlot","generateRule":{"恒星物质":1}}
+{"ruleName":"slotGenStar","ruleType":"PlanetSlot","rules":[{"SlotName":"恒星物质","minHeight":0,"maxHeight":1,"weight":1}]}

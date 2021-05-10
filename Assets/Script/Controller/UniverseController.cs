@@ -72,6 +72,8 @@ public class PlanetType
     public float maxstarEnergy = 0;
     public string description;
     public string slotGenRule;
+    public int minHeight = 0;
+    public int maxHeight = 1;
 }
 [System.Serializable]
 public class SlotType
@@ -95,4 +97,19 @@ public class ResourcesType
 {
     public string resourceName = "Example";
     public string description;
+}
+[System.Serializable]
+public class PlanetSlotGenerateRule
+{
+    public string ruleName;
+    public string ruleType;
+    public List<PlanetSlotSingleRule> rules;
+}
+[System.Serializable]
+public class PlanetSlotSingleRule
+{
+    public string SlotName;
+    public int minHeight;
+    public int maxHeight;
+    public int weight;
 }

@@ -1,1 +1,1 @@
-{"ruleName":"slotGenLand","ruleType":"PlanetSlot","generateRule":{"平原":3,"山脉":2,"海洋":4,"森林":1,"沼泽":1}}
+{"ruleName":"slotGenLand","ruleType":"PlanetSlot","rules":[{"SlotName":"平原","minHeight":0,"maxHeight":2,"weight":1},{"SlotName":"山脉","minHeight":2,"maxHeight":5,"weight":1},{"SlotName":"海洋","minHeight":-2,"maxHeight":0,"weight":1},{"SlotName":"森林","minHeight":0,"maxHeight":2,"weight":1},{"SlotName":"沼泽","minHeight":0,"maxHeight":1,"weight":1},{"SlotName":"冰川","minHeight":-1,"maxHeight":1,"weight":1}]}
