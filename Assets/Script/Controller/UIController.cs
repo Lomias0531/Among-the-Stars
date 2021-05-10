@@ -323,14 +323,26 @@ public class UIController : BaseController<UIController>
             curX += plt.Key.x * 22.5f;
             curY += plt.Key.y * 26;
             slt.transform.localPosition = new Vector2(curX, curY);
-            if(!plt.Value.enabled)
+            if(string.IsNullOrEmpty(plt.Value.slotType))
             {
                 slt.GetComponent<Image>().color = Color.gray;
             }else
             {
-                slt.AddComponent<SlotUI>().thisSlot = plt.Value;
-                int col = Config.Instance.slotTypes.Keys.ToList().IndexOf(plt.Value.slotType);
-                slt.GetComponent<Image>().color = Config.Instance.colorDic[col];
+                if (!plt.Value.enabled)
+                {
+                    int col = Config.Instance.slotTypes.Keys.ToList().IndexOf(plt.Value.slotType);
+                    slt.GetComponent<Image>().color = Config.Instance.colorDic[col];
+                    GameObject sle = Instantiate(slot);
+                    sle.transform.SetParent(slt.transform);
+                    sle.GetComponent<Image>().color = new Color(0.2f, 0.2f, 0.2f, 0.3f);
+                    sle.transform.localPosition = new Vector3(0, 0, 0);
+                }
+                else
+                {
+                    slt.AddComponent<SlotUI>().thisSlot = plt.Value;
+                    int col = Config.Instance.slotTypes.Keys.ToList().IndexOf(plt.Value.slotType);
+                    slt.GetComponent<Image>().color = Config.Instance.colorDic[col];
+                }
             }
             planetSlots.Add(slt);
         }

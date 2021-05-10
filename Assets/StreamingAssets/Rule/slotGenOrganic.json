@@ -1,1 +1,1 @@
-{"ruleName":"slotGenOrganic","ruleType":"PlanetSlot","rules":[{"SlotName":"平原","minHeight":0,"maxHeight":1,"weight":1},{"SlotName":"沼泽","minHeight":0,"maxHeight":1,"weight":1},{"SlotName":"森林","minHeight":0,"maxHeight":1,"weight":1}]}
+{"ruleName":"slotGenOrganic","ruleType":"PlanetSlot","rules":[{"SlotName":"平原","minHeight":0,"maxHeight":1,"weight":4},{"SlotName":"沼泽","minHeight":-2,"maxHeight":0,"weight":4},{"SlotName":"森林","minHeight":0,"maxHeight":1,"weight":1}]}

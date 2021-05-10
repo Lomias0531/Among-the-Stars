@@ -31,7 +31,8 @@ public class Config : BaseController<Config>
         {8,new Color(1,0.28f,0)},
         {9,new Color(1,0.91f,0)},
         {10,new Color(0.8f,1,0)},
-        {11,new Color()},
+        {11,new Color(0.4f,0.2f,0)},
+        {12,new Color(0,0.4f,0.5f)},
     };
 
     // Start is called before the first frame update

@@ -127,7 +127,7 @@ public class Tools
         }
         return temp[rand]; 
     }
-    public static string GetPlanetSlotRule(string Name)
+    public static string GetPlanetSlotRule(string Name,float height)
     {
         string filePath = Application.streamingAssetsPath + "/Rule/" + Name + ".json";
         if (!File.Exists(filePath))
@@ -143,22 +143,27 @@ public class Tools
             return null;
         }
         int maxCount = 0;
-        List<string> temp = new List<string>();
+        List<PlanetSlotSingleRule> temp = new List<PlanetSlotSingleRule>();
         foreach (var item in rule.rules)
         {
-            maxCount += item.weight;
-            for (int i = 0; i < item.weight; i++)
+            if(item.minHeight<=height && item.maxHeight>=height)
             {
-                temp.Add(item.SlotName);
+                maxCount += item.weight;
+                for (int i = 0; i < item.weight; i++)
+                {
+                    temp.Add(item);
+                }
             }
         }
         Debug.Log(Name + " " + maxCount);
-        int rand = UnityEngine.Random.Range(0, maxCount);
+        int rand;
+        rand = UnityEngine.Random.Range(0, maxCount);
         if (rand > 0)
         {
             rand -= 1;
         }
-        return temp[rand];
+
+        return temp[rand].SlotName;
     }
     public static void Serialize<T>(T obj, string filepath, string filename)
     {
