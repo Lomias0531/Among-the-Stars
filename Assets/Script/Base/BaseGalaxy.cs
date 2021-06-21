@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseGalaxy
+public class BaseGalaxy:MonoBehaviour
 {
     public List<BaseSystem> systems { get; set; }
     public string Name { get; set; }
     public int systemCount { get; set; }
+    private int isInitFinished = 0;
 
     public void Init()
     {
@@ -15,9 +16,21 @@ public class BaseGalaxy
         int y = Random.Range(15, 25);
         systemCount = x * y;
         systems = new List<BaseSystem>();
-        for(int i = 0;i<x;i++)
+        isInitFinished = 0;
+        for(int i = 0;i<4;i++)
         {
-            for(int k = 0;k<y;k++)
+            StartCoroutine(initStarSystems(x, y));
+        }
+        do
+        {
+
+        } while (isInitFinished<4);
+    }
+    private IEnumerator initStarSystems(int x,int y)
+    {
+        for (int i = 0; i < x/2; i++)
+        {
+            for (int k = 0; k < y/2; k++)
             {
                 BaseSystem system = new BaseSystem();
                 system.coordX = x;
@@ -29,5 +42,7 @@ public class BaseGalaxy
                 systems.Add(system);
             }
         }
+        isInitFinished += 1;
+        yield return null;
     }
 }

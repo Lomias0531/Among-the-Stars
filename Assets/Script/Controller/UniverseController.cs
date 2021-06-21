@@ -25,7 +25,7 @@ public class UniverseController : BaseController<UniverseController>
         universe = new List<BaseGalaxy>();
         for(int i = 0;i<galaxycount;i++)
         {
-            BaseGalaxy galaxy = new BaseGalaxy();
+            BaseGalaxy galaxy = systemContainer.AddComponent<BaseGalaxy>();
             galaxy.Init();
             universe.Add(galaxy);
         }
