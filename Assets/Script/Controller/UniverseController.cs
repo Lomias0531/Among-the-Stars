@@ -90,6 +90,9 @@ public class ConstructionType
     public string constructionName = "Example";
     public int hitPoints = 100;
     public Dictionary<string, int> requiredResource = new Dictionary<string, int>();
+    public List<string> requiredTech = new List<string>();
+    public Dictionary<string, int> production = new Dictionary<string, int>();
+    public Dictionary<string, int> maintenance = new Dictionary<string, int>();
     public string description;
 }
 [System.Serializable]
