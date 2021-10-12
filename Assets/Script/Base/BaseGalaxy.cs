@@ -17,32 +17,20 @@ public class BaseGalaxy:MonoBehaviour
         systemCount = x * y;
         systems = new List<BaseSystem>();
         isInitFinished = 0;
-        for(int i = 0;i<4;i++)
-        {
-            StartCoroutine(initStarSystems(x, y));
-        }
-        do
-        {
-
-        } while (isInitFinished<4);
+        initStarSystems();
     }
-    private IEnumerator initStarSystems(int x,int y)
+    private void initStarSystems()
     {
-        for (int i = 0; i < x/2; i++)
+        for(int i = 0;i< systemCount; i++)
         {
-            for (int k = 0; k < y/2; k++)
-            {
-                BaseSystem system = new BaseSystem();
-                system.coordX = x;
-                system.coordY = y;
-                system.coordZ = 0;
-                string Name = Tools.getRule("StarGen");
-                StarType type = Config.Instance.starTypes[Name];
-                system.Init(type);
-                systems.Add(system);
-            }
+            BaseSystem system = new BaseSystem();
+            system.coordX = (float)(Tools.Rnd.NextDouble() * 0.5 - 0.5);
+            system.coordY = (float)(Tools.Rnd.NextDouble() * 0.5 - 0.5);
+            system.coordZ = (float)(Tools.Rnd.NextDouble() * 0.5 - 0.5);
+            string Name = Tools.getRule("StarGen");
+            StarType type = Config.Instance.starTypes[Name];
+            system.Init(type);
+            systems.Add(system);
         }
-        isInitFinished += 1;
-        yield return null;
     }
 }

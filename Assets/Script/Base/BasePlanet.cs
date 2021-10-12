@@ -8,13 +8,14 @@ public class BasePlanet
     public int districtCount { get; set; }
     //public List<BaseSlot> district { get; set; }
     public Dictionary<Vector2, BaseSlot> district { get; set; }
-    public string planetType { get; set; }
+    public PlanetType planetType { get; set; }
     public float distance { get; set; }
-    public void Init(string systemName, int num, float dist, PlanetType type)
+    public bool isInited = false;
+    public void Init()
     {
-        Name = systemName + " " + Tools.intToRoman(num);
-        distance = dist;
-        districtCount = Random.Range(type.minSlotNum, type.maxSlotNum);
+        isInited = true;
+        //Name = systemName + " " + Tools.intToRoman(num);
+        //districtCount = Random.Range(planetType.minSlotNum, planetType.maxSlotNum);
         district = new Dictionary<Vector2, BaseSlot>();
         Dictionary<Vector2, float> calNoise = new Dictionary<Vector2, float>();
         int rangeX = (int)Mathf.Clamp((12f * (districtCount / 20f)) + 1, 0, 12f);
@@ -26,19 +27,7 @@ public class BasePlanet
             {
                 if(x>=-rangeX && x<=rangeX && y>=-rangeY && y<=rangeY)
                 {
-                    calNoise.Add(new Vector2(x, y), Random.Range((float)type.minHeight, (float)type.maxHeight));
-                    //float curX = 0;
-                    //float curY = 0;
-                    //if (x % 2 != 0)
-                    //{
-                    //    curY = 13;
-                    //}
-                    //curX += x * 22.5f;
-                    //curY += y * 26;
-                    //if (Mathf.Sqrt(Mathf.Pow(curX, 2) + Mathf.Pow(curY, 2)) > 280)
-                    //{
-                    //    continue;
-                    //}
+                    calNoise.Add(new Vector2(x, y), Random.Range(planetType.minHeight, planetType.maxHeight));
                 }
                 BaseSlot slot = new BaseSlot();
                 slot.enabled = false;
@@ -111,7 +100,7 @@ public class BasePlanet
         {
             for (int y = -rangeY; y <= rangeY; y++)
             {
-                district[new Vector2(x, y)].slotType = Tools.GetPlanetSlotRule(type.slotGenRule, calNoise[new Vector2(x, y)]);
+                district[new Vector2(x, y)].slotType = Tools.GetPlanetSlotRule(planetType.slotGenRule, calNoise[new Vector2(x, y)]);
             }
         }
 
@@ -141,18 +130,6 @@ public class BasePlanet
         {
             for (int y = -10; y <= 10; y++)
             {
-                //float curX = 0;
-                //float curY = 0;
-                //if (x % 2 != 0)
-                //{
-                //    curY = 13;
-                //}
-                //curX += x * 22.5f;
-                //curY += y * 26;
-                //if (Mathf.Sqrt(Mathf.Pow(curX, 2) + Mathf.Pow(curY, 2)) > 280)
-                //{
-                //    continue;
-                //}
                 BaseSlot slot = new BaseSlot();
                 slot.enabled = false;
                 district.Add(new Vector2(x, y), slot);
@@ -176,5 +153,6 @@ public class BasePlanet
             district[new Vector2(reX, reY)].slotType = "恒星物质";
             district[new Vector2(reX, reY)].Init(Config.Instance.slotTypes[district[new Vector2(reX, reY)].slotType]);
         }
+        isInited = true;
     }
 }

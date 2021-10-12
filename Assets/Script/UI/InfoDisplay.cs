@@ -55,18 +55,22 @@ public class InfoDisplay : MonoBehaviour
         string info = "";
         foreach (var planet in sysInfo.planets)
         {
-            info += planet.Name + "," + planet.planetType + "\r\n";
+            info += planet.Name + "," + planet.planetType.planetName + "\r\n";
         }
         txt_SystemInfo.text = info;
     }
     public void InitInfo(BasePlanet planetInfo)
     {
         AlterPosition();
+        if (!planetInfo.isInited)
+        {
+            planetInfo.Init();
+        }
         txt_Name.text = "星球名称";
         txt_Type.text = "星球类型";
         txt_Info.text = "星球详情";
         txt_SystemName.text = planetInfo.Name;
-        txt_SystenType.text = planetInfo.planetType;
+        txt_SystenType.text = planetInfo.planetType.planetName;
         string info = "";
         foreach (var slot in planetInfo.district)
         {

@@ -22,14 +22,14 @@ public class BaseSystem
         star = (GameObject)GameObject.Instantiate(Resources.Load("Prefab/Star"));
         star.transform.SetParent(UniverseController.Instance.systemContainer.transform);
         star.GetComponent<StarSysUI>().thisStarSystem = this;
-        star.transform.position = new Vector3(coordX * 25, coordY * 25, coordZ * 25);
+        star.transform.position = new Vector3(coordX * 15, coordY * 3, coordZ * 15);
         star.name = Name;
         StarEnergy = Random.Range(type.starMinEnergy, type.starEnergy);
         planetCount = Random.Range(0, type.maxPlanets);
         planets = new List<BasePlanet>();
 
         BasePlanet sta = new BasePlanet();
-        sta.planetType = "恒星";
+        sta.planetType = new PlanetType() { planetName = "恒星" };
         sta.Init(this);
         planets.Add(sta);
 
@@ -45,8 +45,11 @@ public class BaseSystem
                 planetType = Config.Instance.planetTypes[Tools.getRule(type.planetGenRule)];
                 ene = Mathf.Clamp(StarEnergy - dis, 0, 120);
             } while (ene < planetType.minStarEnergy || ene > planetType.maxstarEnergy);
-            planet.planetType = planetType.planetName;
-            planet.Init(Name, i, dis,planetType);
+            planet.planetType = planetType;
+            planet.Name = Name + " " + Tools.intToRoman(i);
+            planet.distance = dis;
+            planet.districtCount = Random.Range(planetType.minSlotNum, planetType.maxSlotNum);
+            //planet.Init(Name, i, dis,planetType);
             planets.Add(planet);
             if (dis > type.maxDistance)
             {

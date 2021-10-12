@@ -290,7 +290,7 @@ public class UIController : BaseController<UIController>
         foreach (var _planet in sys.planets)
         {
             GameObject plt = GameObject.Instantiate(planet);
-            byte[] bytes = File.ReadAllBytes(Application.streamingAssetsPath.Replace("StreamingAssets", "Resources") + "/Image/PlanetPic/" + _planet.planetType + ".png");
+            byte[] bytes = File.ReadAllBytes(Application.streamingAssetsPath.Replace("StreamingAssets", "Resources") + "/Image/PlanetPic/" + _planet.planetType.planetName + ".png");
             Texture2D tex = new Texture2D(100, 100);
             tex.LoadImage(bytes);
             plt.GetComponent<Image>().sprite = Sprite.Create(tex,new Rect(0,0,100,100),new Vector2(0.5f,0.5f));
@@ -303,6 +303,10 @@ public class UIController : BaseController<UIController>
     }
     void InitPlanetSight(BasePlanet planet)
     {
+        if (!planet.isInited)
+        {
+            planet.Init();
+        }
         SwitchSight(SightStatus.Planet);
         curSight = SightStatus.Planet;
         foreach (var item in planetSlots)
